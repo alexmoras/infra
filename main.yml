@@ -2,9 +2,6 @@
   - hosts: nextcloud
     vars_files:
       - 'vars/vault.yml'
-    vars:
-      pip_install_packages:
-        - name: docker
     roles:
       - common
       - geerlingguy.docker
