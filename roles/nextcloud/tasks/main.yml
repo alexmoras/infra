@@ -49,7 +49,7 @@
         
         cron:
           container_name: cron
-          image: nextcloud:fpm-alpine
+          image: nextcloud
           restart: always
           volumes:
             - "{{ nextcloud_data_location }}:/var/www/html"
