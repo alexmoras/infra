@@ -12,7 +12,7 @@ docker_compose_path: /usr/local/bin/docker-compose
 
 # caddy_ansible.caddy_ansible
 caddy_config: |
-  nc-test.int.moras.uk {
+  {{ nextcloud_domain }} {
     reverse_proxy localhost:8080
 
     redir /.well-known/carddav /remote.php/dav 301

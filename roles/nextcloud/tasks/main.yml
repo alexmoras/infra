@@ -1,14 +1,10 @@
 ---
 
-- name: Create Nextcloud docker container
+- name: Deploy Nextcloud docker container
   community.docker.docker_compose:
     project_name: nextcloud
     definition:
       version: '2'
-
-      volumes:
-        nextcloud:
-        db:
 
       services:
         db:
@@ -16,7 +12,7 @@
           restart: always
           command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
           volumes:
-            - db:/var/lib/mysql
+            - "{{ nextcloud_db_location }}:/var/lib/mysql"
           environment:
             - "MYSQL_ROOT_PASSWORD={{ nextcloud_db_root_pass }}"
             - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
@@ -29,7 +25,7 @@
           links:
             - db
           volumes:
-            - nextcloud:/var/www/html
+            - "{{ nextcloud_data_location }}:/var/www/html"
           environment:
             - TRUSTED_PROXIES=127.0.0.1
             - OVERWRITEPROTOCOL=https
@@ -56,5 +52,5 @@
           image: nextcloud:fpm-alpine
           restart: always
           volumes:
-            - nextcloud:/var/www/html
+            - "{{ nextcloud_data_location }}:/var/www/html"
           entrypoint: /cron.sh
