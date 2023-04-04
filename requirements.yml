@@ -1,0 +1,10 @@
+roles:
+  - src: geerlingguy.docker
+  - src: geerlingguy.pip
+  - src: grog.package
+  - src: geerlingguy.security
+  - src: geerlingguy.ntp
+  - src: weareinteractive.environment
+
+collections:
+  - name: community.docker

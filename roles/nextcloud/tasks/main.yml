@@ -1,0 +1,60 @@
+---
+
+- name: Run Nextcloud docker
+  tasks:
+    - community.docker.docker_compose:
+        project_src: nextcloud
+        state: absent
+
+    - community.docker.docker_compose:
+        project_name: nextcloud
+        definition:
+          version: '2'
+
+          volumes:
+            nextcloud:
+            db:
+
+          services:
+            db:
+              image: mariadb:10.6
+              restart: always
+              command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+              volumes:
+                - db:/var/lib/mysql
+              environment:
+                - "MYSQL_ROOT_PASSWORD={{ nextcloud_db_root_pass }}"
+                - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
+                - MYSQL_DATABASE=nextcloud
+                - MYSQL_USER=nextcloud
+
+            app:
+              image: nextcloud
+              restart: always
+              links:
+                - db
+              volumes:
+                - nextcloud:/var/www/html
+              environment:
+                - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
+                - MYSQL_DATABASE=nextcloud
+                - MYSQL_USER=nextcloud
+                - MYSQL_HOST=db
+                - REDIS_HOST=redis
+              depends_on:
+                - db
+                - redis
+                - cron
+            
+            redis:
+              image: redis:alpine
+              container_name: redis
+              restart: always
+            
+            cron:
+              container_name: cron
+              image: nextcloud:fpm-alpine
+              restart: always
+              volumes:
+                - nextcloud:/var/www/html
+              entrypoint: /cron.sh

@@ -1,0 +1,33 @@
+---
+
+# generic settings
+main_username: alex
+main_groupname: "{{ main_username }}"
+main_uid: "1000"
+main_gid: "{{ main_uid }}"
+
+# grog.package
+package_list:
+  - name: curl
+  - name: unattended-upgrades
+  - name: openssh-server
+  - name: sudo
+
+# weareinteractive.environment
+environment_config: {
+  "PUID": "{{ main_gid }}",
+  "PGID": "{{ main_gid }}"
+}
+
+# geerlingguy.ntp
+ntp_timezone: "Europe/London"
+
+# geerlingguy.security
+security_ssh_port: 22
+security_ssh_password_authentication: "no"
+security_ssh_permit_root_login: "no"
+security_ssh_usedns: "no"
+security_autoupdate_enabled: true
+security_fail2ban_enabled: true
+security_sudoers_passwordless:
+  - "{{ main_username }}"

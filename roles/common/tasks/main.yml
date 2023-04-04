@@ -1,0 +1,6 @@
+---
+
+- name: Update OS
+  apt:
+    name: "*"
+    state: latest
