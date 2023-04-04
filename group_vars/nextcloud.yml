@@ -4,6 +4,10 @@
 pip_install_packages:
   - name: docker
 
+docker_install_compose: true
+docker_compose_version: "1.26.0"
+docker_compose_arch: "{{ ansible_architecture }}"
+docker_compose_path: /usr/local/bin/docker-compose
 
 caddy_config: |
   http://localhost:2020
