@@ -7,3 +7,4 @@
       - geerlingguy.docker
       - geerlingguy.pip
       - nextcloud
+      - caddy_ansible.caddy_ansible
