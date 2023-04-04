@@ -3,6 +3,7 @@
 # geerlingguy.pip
 pip_install_packages:
   - name: docker
+  - name: docker-compose
 
 # geerlingguy.docker
 docker_install_compose: true
