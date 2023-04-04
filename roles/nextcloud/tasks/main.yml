@@ -32,7 +32,7 @@
             - nextcloud:/var/www/html
           environment:
             - TRUSTED_PROXIES=127.0.0.1
-            - OVERWRITEPROTOC=https
+            - OVERWRITEPROTOCOL=https
             - "NEXTCLOUD_TRUSTED_DOMAINS= {{ nextcloud_domain }}"
             - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
             - MYSQL_DATABASE=nextcloud
