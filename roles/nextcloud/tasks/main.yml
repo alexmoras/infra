@@ -31,7 +31,8 @@
           volumes:
             - nextcloud:/var/www/html
           environment:
-            - "TRUSTED_PROXIES={{ nextcloud_proxies }}"
+            - TRUSTED_PROXIES=127.0.0.1
+            - OVERWRITEPROTOC=https
             - "NEXTCLOUD_TRUSTED_DOMAINS= {{ nextcloud_domain }}"
             - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
             - MYSQL_DATABASE=nextcloud
