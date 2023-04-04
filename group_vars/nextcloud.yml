@@ -10,8 +10,13 @@ docker_compose_arch: "{{ ansible_architecture }}"
 docker_compose_path: /usr/local/bin/docker-compose
 
 caddy_config: |
-  http://localhost:2020
-  respond "Hello, world!"
+  nc-test.int.moras.uk {
+    reverse_proxy localhost:8080
+
+    tls logs@moras.dev {
+      dns cloudflare {{ cloudflare_dns_token: }}
+    }
+  }
 caddy_update: true
 caddy_packages: [
   "github.com/caddy-dns/cloudflare"
