@@ -5,6 +5,7 @@ roles:
   - src: geerlingguy.security
   - src: geerlingguy.ntp
   - src: weareinteractive.environment
+  - src: caddy_ansible.caddy_ansible
 
 collections:
   - name: community.docker

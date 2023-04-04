@@ -1,10 +1,5 @@
 ---
 
-- name: Run Nextcloud docker
-  community.docker.docker_compose:
-    project_src: nextcloud
-    state: absent
-
 - name: Create Nextcloud docker container
   community.docker.docker_compose:
     project_name: nextcloud
@@ -41,6 +36,8 @@
             - MYSQL_USER=nextcloud
             - MYSQL_HOST=db
             - REDIS_HOST=redis
+          ports:
+            - 8080:80
           depends_on:
             - db
             - redis
