@@ -3,7 +3,8 @@
     vars_files:
       - 'vars/vault.yml'
     roles:
-      - common
+      - grog.package
+      - geerlingguy.ntp
       - geerlingguy.docker
       - geerlingguy.pip
       - nextcloud
