@@ -31,6 +31,8 @@
           volumes:
             - nextcloud:/var/www/html
           environment:
+            - "TRUSTED_PROXIES={{ nextcloud_proxies }}"
+            - "NEXTCLOUD_TRUSTED_DOMAINS= {{ nextcloud_domain }}"
             - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
             - MYSQL_DATABASE=nextcloud
             - MYSQL_USER=nextcloud

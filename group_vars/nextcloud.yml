@@ -15,6 +15,10 @@ caddy_config: |
   nc-test.int.moras.uk {
     reverse_proxy localhost:8080
 
+    header {
+      Strict-Transport-Security max-age=15552000
+    }
+
     tls logs@moras.dev {
       dns cloudflare {{ cloudflare_dns_token }}
     }
