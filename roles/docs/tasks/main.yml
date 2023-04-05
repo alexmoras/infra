@@ -8,4 +8,4 @@
 - name: Build mkdocs site
   script:
     chdir: /var/www/lab-docs
-    cmd: mkdocs build
+    cmd: /usr/local/bin/mkdocs build
