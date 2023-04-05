@@ -6,6 +6,6 @@
     dest: /var/www/lab-docs
 
 - name: Build mkdocs site
-  script:
+  command:
     chdir: /var/www/lab-docs
     cmd: /usr/local/bin/mkdocs build
