@@ -34,3 +34,55 @@ caddy_packages: [
 caddy_setcap: true
 caddy_systemd_capabilities_enabled: true
 caddy_systemd_capabilities: "CAP_NET_BIND_SERVICE"
+
+# docker-compose file
+docker_compose:
+  version: '2'
+  services:
+    db:
+      image: mariadb:10.6
+      restart: always
+      command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+      volumes:
+        - "{{ nextcloud_db_location }}:/var/lib/mysql"
+      environment:
+        - "MYSQL_ROOT_PASSWORD={{ nextcloud_db_root_pass }}"
+        - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
+        - MYSQL_DATABASE=nextcloud
+        - MYSQL_USER=nextcloud
+
+    app:
+      image: nextcloud
+      restart: always
+      links:
+        - db
+      volumes:
+        - "{{ nextcloud_data_location }}:/var/www/html"
+      environment:
+        - TRUSTED_PROXIES=127.0.0.1
+        - OVERWRITEPROTOCOL=https
+        - "NEXTCLOUD_TRUSTED_DOMAINS= {{ nextcloud_domain }}"
+        - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
+        - MYSQL_DATABASE=nextcloud
+        - MYSQL_USER=nextcloud
+        - MYSQL_HOST=db
+        - REDIS_HOST=redis
+      ports:
+        - 8080:80
+      depends_on:
+        - db
+        - redis
+        - cron
+    
+    redis:
+      image: redis:alpine
+      container_name: redis
+      restart: always
+    
+    cron:
+      container_name: cron
+      image: nextcloud
+      restart: always
+      volumes:
+        - "{{ nextcloud_data_location }}:/var/www/html"
+      entrypoint: /cron.sh
