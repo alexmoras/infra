@@ -13,9 +13,9 @@
         tags: nextcloud
       - role: caddy_ansible.caddy_ansible
         tags: caddy
-  
+
   - hosts: docs
-    vars_files::
+    vars_files:
       - 'vars/vault.yml'
     roles:
       - role: grog.package
