@@ -7,7 +7,8 @@ pip_install_packages:
 # caddy_ansible.caddy_ansible
 caddy_config: |
   {{ docs_domain }} {
-    file_server /var/www/lab-docs/site
+    root * /var/www/lab-docs/site
+    file_server
 
     tls logs@moras.dev {
       dns cloudflare {{ cloudflare_dns_token }}
