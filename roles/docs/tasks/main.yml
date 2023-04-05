@@ -1,0 +1,11 @@
+---
+
+- name: Pull git repo
+  git:
+    repo: 'git@github.com:alexmoras/lab-wiki.git'
+    dest: /var/www/lab-docs
+
+- name: Build mkdocs site
+  script:
+    chdir: /var/www/lab-docs
+    cmd: mkdocs build

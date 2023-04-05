@@ -3,9 +3,24 @@
     vars_files:
       - 'vars/vault.yml'
     roles:
-      - grog.package
-      - geerlingguy.ntp
-      - geerlingguy.docker
-      - geerlingguy.pip
-      - nextcloud
-      - caddy_ansible.caddy_ansible
+      - role: grog.package
+      - role: geerlingguy.ntp
+      - role: geerlingguy.docker
+        tags: docker, nextcloud
+      - role: geerlingguy.pip
+        tags: docker, nextcloud
+      - role: nextcloud
+        tags: nextcloud
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
+  
+  - hosts: docs
+    vars_files::
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: geerlingguy.pip
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
+      - role: docs
+        tags: docs

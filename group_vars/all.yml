@@ -12,6 +12,7 @@ package_list:
   - name: unattended-upgrades
   - name: openssh-server
   - name: sudo
+  - name: git
 
 # weareinteractive.environment
 environment_config: {
