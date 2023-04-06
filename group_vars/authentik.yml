@@ -75,7 +75,7 @@ docker_compose:
         - AUTHENTIK_POSTGRESQL__HOST=postgresql
         - AUTHENTIK_POSTGRESQL__USER=authentik
         - AUTHENTIK_POSTGRESQL__NAME=authentik
-        - "AUTHENTIK_POSTGRESQL__PASSWORD={{ authentik_db_pass }} "
+        - "AUTHENTIK_POSTGRESQL__PASSWORD={{ authentik_db_pass }}"
         - "AUTHENTIK_SECRET_KEY={{ authentik_secret_key }}"
         - AUTHENTIK_ERROR_REPORTING__ENABLED=true
         - "AUTHENTIK_EMAIL__HOST={{ smtp_server }}"
