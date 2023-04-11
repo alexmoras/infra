@@ -24,18 +24,3 @@
         tags: caddy
       - role: docs
         tags: docs
-
-  - hosts: authentik
-    vars_files:
-      - 'vars/vault.yml'
-    roles:
-      - role: grog.package
-      - role: geerlingguy.ntp
-      - role: geerlingguy.docker
-        tags: docker, authentik
-      - role: geerlingguy.pip
-        tags: docker, authentik
-      - role: authentik
-        tags: authentik
-      - role: caddy_ansible.caddy_ansible
-        tags: caddy

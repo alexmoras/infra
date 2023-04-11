@@ -1,6 +1,0 @@
----
-
-- name: Deploy Authentik docker container
-  community.docker.docker_compose:
-    project_name: authentik
-    definition: "{{ docker_compose }}"
