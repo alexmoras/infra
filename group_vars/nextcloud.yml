@@ -45,7 +45,7 @@ docker_compose:
 
   services:
     nextcloud:
-      image: nextcloud/all-in-one:latest
+      image: nextcloud/all-in-one:beta
       restart: always
       container_name: nextcloud-aio-mastercontainer # This line is not allowed to be changed
       volumes:
