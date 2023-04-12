@@ -11,8 +11,6 @@
         tags: docker, nextcloud
       - role: nextcloud
         tags: nextcloud
-      - role: caddy_ansible.caddy_ansible
-        tags: caddy
 
   - hosts: docs
     vars_files:
@@ -24,3 +22,11 @@
         tags: caddy
       - role: docs
         tags: docs
+
+  - hosts: bastion
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy

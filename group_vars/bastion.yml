@@ -1,0 +1,25 @@
+---
+
+# caddy_ansible.caddy_ansible
+caddy_config: |
+  {{ nextcloud_domain }} {
+    reverse_proxy {{ nextcloud_int_ip }}:11000
+
+    redir /.well-known/carddav /remote.php/dav 301
+    redir /.well-known/caldav /remote.php/dav 301
+
+    header {
+      Strict-Transport-Security max-age=15552000
+    }
+
+    tls logs@moras.dev {
+      dns cloudflare {{ cloudflare_dns_token }}
+    }
+  }
+caddy_update: true
+caddy_packages: [
+  "github.com/caddy-dns/cloudflare"
+]
+caddy_setcap: true
+caddy_systemd_capabilities_enabled: true
+caddy_systemd_capabilities: "CAP_NET_BIND_SERVICE"
