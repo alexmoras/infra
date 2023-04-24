@@ -30,3 +30,16 @@
       - role: grog.package
       - role: caddy_ansible.caddy_ansible
         tags: caddy
+
+  - hosts: immich
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: geerlingguy.ntp
+      - role: geerlingguy.docker
+        tags: docker, immich
+      - role: geerlingguy.pip
+        tags: docker, immich
+      - role: immich
+        tags: immich

@@ -8,9 +8,17 @@ caddy_config: |
     redir /.well-known/carddav /remote.php/dav 301
     redir /.well-known/caldav /remote.php/dav 301
 
-    header {
-      Strict-Transport-Security max-age=15552000
+    log {
+      output file /var/log/caddy/access.log
     }
+
+    tls logs@moras.dev {
+      dns cloudflare {{ cloudflare_dns_token }}
+    }
+  }
+
+  {{ immich_domain }} {
+    reverse_proxy {{ immich_int_ip }}:2283
 
     tls logs@moras.dev {
       dns cloudflare {{ cloudflare_dns_token }}

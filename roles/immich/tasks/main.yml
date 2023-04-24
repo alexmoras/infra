@@ -1,0 +1,6 @@
+---
+
+- name: Deploy Immich docker container
+  community.docker.docker_compose:
+    project_name: immich
+    definition: "{{ docker_compose }}"
