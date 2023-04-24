@@ -72,6 +72,7 @@ docker_compose:
         - AUTHENTIK_POSTGRESQL__USER=authentik
         - AUTHENTIK_POSTGRESQL__NAME=authentik
         - "AUTHENTIK_POSTGRESQL__PASSWORD={{ authentik_database_password }}"
+        - "AUTHENTIK_SECRET_KEY={{ authentik_secret_key }}"
       # `user: root` and the docker socket volume are optional.
       # See more for the docker socket integration here:
       # https://goauthentik.io/docs/outposts/integrations/docker
