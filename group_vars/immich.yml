@@ -135,8 +135,6 @@ docker_compose:
     database:
       container_name: immich_postgres
       image: postgres:14
-      env_file:
-        - .env
       environment:
         - "POSTGRES_PASSWORD={{ immich_database_password }}"
         - POSTGRES_USER=immich
