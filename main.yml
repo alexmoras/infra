@@ -43,3 +43,15 @@
         tags: docker, immich
       - role: immich
         tags: immich
+  - hosts: authentik
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: geerlingguy.ntp
+      - role: geerlingguy.docker
+        tags: docker, authentik
+      - role: geerlingguy.pip
+        tags: docker, authentik
+      - role: authentik
+        tags: authentik

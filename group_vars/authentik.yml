@@ -1,0 +1,90 @@
+---
+
+# geerlingguy.pip
+pip_install_packages:
+  - name: docker
+  - name: docker-compose
+
+# geerlingguy.docker
+docker_install_compose: true
+docker_compose_version: "1.26.0"
+docker_compose_arch: "{{ ansible_architecture }}"
+docker_compose_path: /usr/local/bin/docker-compose
+
+# docker-compose file
+docker_compose:
+  version: "3.4"
+
+  services:
+    postgresql:
+      image: docker.io/library/postgres:12-alpine
+      restart: unless-stopped
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+        start_period: 20s
+        interval: 30s
+        retries: 5
+        timeout: 5s
+      volumes:
+        - "{{ authentik_storage_location }}/database:/var/lib/postgresql/data"
+      environment:
+        - "POSTGRES_PASSWORD={{ authentik_database_password }}"
+        - POSTGRES_USER=authentik
+        - POSTGRES_DB=authentik
+
+    redis:
+      image: docker.io/library/redis:alpine
+      command: --save 60 1 --loglevel warning
+      restart: unless-stopped
+      healthcheck:
+        test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+        start_period: 20s
+        interval: 30s
+        retries: 5
+        timeout: 3s
+      volumes:
+        - redis:/data
+
+    server:
+      image: ghcr.io/goauthentik/server
+      restart: unless-stopped
+      command: server
+      environment:
+        - AUTHENTIK_REDIS__HOST=redis
+        - AUTHENTIK_POSTGRESQL__HOST=postgresql
+        - AUTHENTIK_POSTGRESQL__USER=authentik
+        - AUTHENTIK_POSTGRESQL__NAME=authentik
+        - "AUTHENTIK_POSTGRESQL__PASSWORD={{ authentik_database_password }}"
+        - "AUTHENTIK_SECRET_KEY={{ authentik_secret_key }}"
+      volumes:
+        - "{{ authentik_storage_location }}/media:/media"
+        - "{{ authentik_storage_location }}/custom-templates:/templates"
+      ports:
+        - 9000:9000
+
+    worker:
+      image: ghcr.io/goauthentik/server
+      restart: unless-stopped
+      command: worker
+      environment:
+        - AUTHENTIK_REDIS__HOST=redis
+        - AUTHENTIK_POSTGRESQL__HOST=postgresql
+        - AUTHENTIK_POSTGRESQL__USER=authentik
+        - AUTHENTIK_POSTGRESQL__NAME=authentik
+        - "AUTHENTIK_POSTGRESQL__PASSWORD={{ authentik_database_password }}"
+      # `user: root` and the docker socket volume are optional.
+      # See more for the docker socket integration here:
+      # https://goauthentik.io/docs/outposts/integrations/docker
+      # Removing `user: root` also prevents the worker from fixing the permissions
+      # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
+      # (1000:1000 by default)
+      user: root
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - "{{ authentik_storage_location }}/media:/media"
+        - "{{ authentik_storage_location }}/certs:/certs"
+        - "{{ authentik_storage_location }}/custom-templates:/templates"
+
+  volumes:
+    redis:
+      driver: local

@@ -20,10 +20,27 @@ caddy_config: |
   {{ immich_domain }} {
     reverse_proxy {{ immich_int_ip }}:2283
 
+    log {
+      output file /var/log/caddy/access.log
+    }
+
     tls logs@moras.dev {
       dns cloudflare {{ cloudflare_dns_token }}
     }
   }
+
+  {{ authentik_domain }} {
+    reverse_proxy {{ authentik_int_ip }}:9000
+
+    log {
+      output file /var/log/caddy/access.log
+    }
+
+    tls logs@moras.dev {
+      dns cloudflare {{ cloudflare_dns_token }}
+    }
+  }
+
 caddy_update: true
 caddy_packages: [
   "github.com/caddy-dns/cloudflare"
