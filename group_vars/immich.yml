@@ -153,8 +153,8 @@ docker_compose:
         - IMMICH_SERVER_URL=http://immich-server:3001
       ports:
         - 2283:8080
-      logging:
-        driver: none
+#      logging:
+#        driver: none
       depends_on:
         - immich-server
       restart: always
