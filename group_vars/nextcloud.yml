@@ -70,4 +70,7 @@ docker_compose:
       restart: always
       volumes:
         - "{{ nextcloud_storage_location }}/html:/var/www/html"
+        - "{{ nextcloud_storage_location }}/storage:/data"
+      environment:
+        - NEXTCLOUD_DATA_DIR=/data
       entrypoint: /cron.sh
