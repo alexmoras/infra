@@ -38,7 +38,7 @@ docker_compose:
       environment:
         - TRUSTED_PROXIES=10.51.1.1
         - OVERWRITEPROTOCOL=https
-        - "NEXTCLOUD_TRUSTED_DOMAINS= {{ nextcloud_domain }}"
+        - "NEXTCLOUD_TRUSTED_DOMAINS={{ nextcloud_domain }}"
         - APACHE_DISABLE_REWRITE_IP=1
         - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
         - MYSQL_DATABASE=nextcloud
