@@ -16,17 +16,18 @@
         cmd: mkdir -p /etc/apt/keyrings/
 
     - name: Get signing key
-      ansible.builtin.command:
-        cmd: curl -fsSL https://packagecloud.io/crowdsec/crowdsec/gpgkey | gpg --dearmor > /etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg
+      ansible.builtin.get_url:
+        url: https://packagecloud.io/crowdsec/crowdsec/gpgkey
+        dest: /etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.asc
 
     - name: Add repo to sources
       ansible.builtin.apt_repository:
-        repo: "deb [signed-by=/etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg] https://packagecloud.io/crowdsec/crowdsec/debian {{ ansible_distribution_release }} main"
+        repo: "deb [signed-by=/etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.asc] https://packagecloud.io/crowdsec/crowdsec/debian {{ ansible_distribution_release }} main"
         state: present
     
     - name: Add repo to sources
       ansible.builtin.apt_repository:
-        repo: "deb-src [signed-by=/etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg] https://packagecloud.io/crowdsec/crowdsec/debian {{ ansible_distribution_release }} main"
+        repo: "deb-src [signed-by=/etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.asc] https://packagecloud.io/crowdsec/crowdsec/debian {{ ansible_distribution_release }} main"
         state: present
 
 - name: Install CrowdSec
