@@ -1,0 +1,33 @@
+---
+
+- name: Add CrowdSec repository
+  block:
+    - name: Get signing key
+      ansible.builtin.get_url:
+        url: https://packagecloud.io/crowdsec/crowdsec/gpgkey
+        dest: /etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg
+
+    - name: Add repo to sources
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg] https://packagecloud.io/crowdsec/crowdsec/debian {{ ansible_distribution_release }} main"
+        state: present
+    
+    - name: Add repo to sources
+      ansible.builtin.apt_repository:
+        repo: "deb-src [signed-by=/etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg] https://packagecloud.io/crowdsec/crowdsec/debian {{ ansible_distribution_release }} main"
+        state: present
+
+- name: Install CrowdSec
+  ansible.builtin.apt:
+    pkg:
+    - crowdsec
+    - crowdsec-firewall-bouncer-iptables
+    update_cache: yes
+
+- name: Install Caddy Collection
+  ansible.builtin.command:
+    cmd: cscli parsers install crowdsecurity/caddy-logs
+
+- name: Link CrowdSec to web interface
+  ansible.builtin.command:
+    cmd: cscli console enroll {{ crowdsec_enroll_key }}

@@ -30,6 +30,8 @@
       - role: grog.package
       - role: caddy_ansible.caddy_ansible
         tags: caddy
+      - role: crowdsec
+        tags: crowdsec
 
   - hosts: immich
     vars_files:
@@ -43,6 +45,7 @@
         tags: docker, immich
       - role: immich
         tags: immich
+
   - hosts: authentik
     vars_files:
       - 'vars/vault.yml'
