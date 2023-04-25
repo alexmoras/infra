@@ -2,6 +2,19 @@
 
 - name: Add CrowdSec repository
   block:
+    - name: Install apt repo management packages
+      ansible.builtin.apt:
+        pkg:
+        - debian-archive-keyring
+        - apt-transport-https
+        - gnupg
+        - curl
+        update_cache: yes
+
+    - name: Create directory for keys
+      ansible.builtin.command:
+        cmd: mkdir -p /etc/apt/keyrings/
+
     - name: Get signing key
       ansible.builtin.get_url:
         url: https://packagecloud.io/crowdsec/crowdsec/gpgkey
