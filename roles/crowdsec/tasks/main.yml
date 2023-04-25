@@ -16,9 +16,8 @@
         cmd: mkdir -p /etc/apt/keyrings/
 
     - name: Get signing key
-      ansible.builtin.get_url:
-        url: https://packagecloud.io/crowdsec/crowdsec/gpgkey
-        dest: /etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg
+      ansible.builtin.command:
+        cmd: curl -fsSL https://packagecloud.io/crowdsec/crowdsec/gpgkey | gpg --dearmor > /etc/apt/keyrings/crowdsec_crowdsec-archive-keyring.gpg
 
     - name: Add repo to sources
       ansible.builtin.apt_repository:
