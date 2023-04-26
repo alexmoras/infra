@@ -1,0 +1,6 @@
+---
+
+- name: Deploy Paperless docker container
+  community.docker.docker_compose:
+    project_name: nextcloud
+    definition: "{{ docker_compose }}"

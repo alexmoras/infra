@@ -58,3 +58,16 @@
         tags: docker, authentik
       - role: authentik
         tags: authentik
+  
+  - hosts: paperless
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: geerlingguy.ntp
+      - role: geerlingguy.docker
+        tags: docker, paperless
+      - role: geerlingguy.pip
+        tags: docker, paperless
+      - role: paperless
+        tags: paperless
