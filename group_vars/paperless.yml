@@ -62,11 +62,6 @@ docker_compose:
         - broker
       ports:
         - "8050:8000"
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8000"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
       volumes:
         - "{{ paperless_storage_location }}/data:/usr/src/paperless/data"
         - "{{ paperless_storage_location }}/media:/usr/src/paperless/media"
