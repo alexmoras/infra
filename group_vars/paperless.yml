@@ -37,13 +37,13 @@ docker_compose:
   version: "3.4"
   services:
     broker:
-      image: docker.io/library/redis:7
+      image: redis:7
       restart: unless-stopped
       volumes:
         - redis:/data
 
     db:
-      image: docker.io/library/mariadb:10
+      image: mariadb:10
       restart: unless-stopped
       volumes:
         - "{{ paperless_storage_location }}/database:/var/lib/mysql"
