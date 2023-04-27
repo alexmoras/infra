@@ -74,7 +74,7 @@ docker_compose:
         - PAPERLESS_DBUSER=paperless
         - "PAPERLESS_DBPASS={{ paperless_database_password }}"
         - PAPERLESS_DBPORT=3306
-        - PAPERLESS_OCR_LANGUAGE=eng cym
+        - PAPERLESS_OCR_LANGUAGE=eng+cym
         - PAPERLESS_OCR_LANGUAGES=eng cym
         - PAPERLESS_TIME_ZONE=Europe/London
         - "PAPERLESS_URL=https://{{ paperless_domain }}"
