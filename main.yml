@@ -65,6 +65,8 @@
     roles:
       - role: grog.package
       - role: geerlingguy.ntp
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
       - role: geerlingguy.docker
         tags: docker, paperless
       - role: geerlingguy.pip
