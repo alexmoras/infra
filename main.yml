@@ -73,3 +73,11 @@
         tags: docker, paperless
       - role: paperless
         tags: paperless
+
+  - hosts: download
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: geerlingguy.ntp
+      - role: radarr
