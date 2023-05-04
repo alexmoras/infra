@@ -80,4 +80,11 @@
     roles:
       - role: grog.package
       - role: geerlingguy.ntp
-      - role: radarr
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
+      - role: geerlingguy.docker
+        tags: docker, servarr
+      - role: geerlingguy.pip
+        tags: docker, servarr
+      - role: servarr
+        tags: servarr
