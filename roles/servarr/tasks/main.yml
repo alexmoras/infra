@@ -1,0 +1,6 @@
+---
+
+- name: Deploy Servarr docker containers (lidarr / sonarr / radarr)
+  community.docker.docker_compose:
+    project_name: servarr
+    definition: "{{ docker_compose }}"
