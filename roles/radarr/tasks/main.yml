@@ -1,0 +1,28 @@
+---
+
+- name: Install packages for Radarr
+  ansible.builtin.apt:
+    pkg:
+    - curl
+    - sqlite3
+    update_cache: yes
+
+- name: Install Radarr
+  ansible.builtin.unarchive:
+    src: http://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64
+    dest: /opt/
+
+- name: Update systemd
+  block:
+  - name: Create systemd service
+    template:
+      src: templates/radarr.service.j2
+      dest: /etc/systemd/system/radarr.service
+  
+  - name: Update systemd
+    ansible.builtin.command:
+      cmd: systemctl -q daemon-reload
+
+  - name: Enable Lidarr
+    ansible.builtin.command:
+      cmd: systemctl enable --now -q radarr
