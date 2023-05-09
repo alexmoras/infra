@@ -53,10 +53,6 @@ docker_compose:
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
     volumes:
       - '{{ servarr_storage_location }}/lidarr:/config'
       - '{{ servarr_storage_location }}/Music:/music'
@@ -68,9 +64,6 @@ docker_compose:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - '{{ servarr_storage_location }}/radarr:/config'
       - '{{ servarr_storage_location }}/Films:/movies'
@@ -82,9 +75,6 @@ docker_compose:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - '{{ servarr_storage_location }}/sonarr:/config'
       - '{{ servarr_storage_location }}/TV:/tv'
@@ -96,9 +86,6 @@ docker_compose:
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - '{{ servarr_storage_location }}/sabnzbd:/config'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
@@ -110,9 +97,6 @@ docker_compose:
   overseerr:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - '{{ servarr_storage_location }}/overseerr:/config'
     ports:
