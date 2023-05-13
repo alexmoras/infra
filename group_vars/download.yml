@@ -57,6 +57,9 @@ docker_compose:
       - '{{ servarr_storage_location }}/lidarr:/config'
       - '{{ servarr_storage_location }}/Music:/music'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
+    environment:
+      - PUID=0
+      - PGID=0
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -68,6 +71,9 @@ docker_compose:
       - '{{ servarr_storage_location }}/radarr:/config'
       - '{{ servarr_storage_location }}/Films:/movies'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
+    environment:
+      - PUID=0
+      - PGID=0
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -79,6 +85,9 @@ docker_compose:
       - '{{ servarr_storage_location }}/sonarr:/config'
       - '{{ servarr_storage_location }}/TV:/tv'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
+    environment:
+      - PUID=0
+      - PGID=0
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -90,6 +99,9 @@ docker_compose:
       - '{{ servarr_storage_location }}/sabnzbd:/config'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
       - '{{ servarr_storage_location }}/nzb/incomplete:/incomplete-downloads'
+    environment:
+      - PUID=0
+      - PGID=0
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -99,6 +111,9 @@ docker_compose:
     container_name: overseerr
     volumes:
       - '{{ servarr_storage_location }}/overseerr:/config'
+    environment:
+      - PUID=0
+      - PGID=0
     ports:
       - 5055:5055
     restart: unless-stopped
