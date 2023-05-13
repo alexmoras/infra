@@ -31,6 +31,11 @@ caddy_config: |
     }
     redir /sabnzbd /sabnzbd/
 
+    route /lidarr* {
+      reverse_proxy localhost:8686
+    }
+    redir /lidarr /lidarr/
+
 
     header {
       Strict-Transport-Security max-age=15552000
