@@ -1,0 +1,39 @@
+---
+# DEFAULT VARIABLES #
+# These can be overriden in the group_vars files or in the vault
+plex_storage_location: ~/plex
+plex_puid: 0
+plex_pgid: 0
+plex_claim: ""
+
+# DOCKER COMPOSE #
+plex_docker_compose:
+  version: "2.1"
+  services:
+    plex:
+      image: lscr.io/linuxserver/plex:latest
+      container_name: plex
+      network_mode: host
+      environment:
+        - 'PUID={{ plex_puid }}'
+        - 'PGID={{ plex_pgid }}'
+        - VERSION=latest
+        - 'PLEX_CLAIM={{ plex_claim }}'
+      volumes:
+        - '{{ plex_storage_location }}/plex:/config'
+        - '{{ plex_storage_location }}/tv:/tv'
+        - '{{ plex_storage_location }}/films:/movies'
+        - '{{ plex_storage_location }}/music:/music'
+      restart: unless-stopped
+
+    tautulli:
+      image: lscr.io/linuxserver/tautulli:latest
+      container_name: tautulli
+      environment:
+        - 'PUID={{ plex_puid }}'
+        - 'PGID={{ plex_pgid }}'
+      volumes:
+        - '{{ plex_storage_location }}/tautulli:/config'
+      ports:
+        - 8181:8181
+      restart: unless-stopped

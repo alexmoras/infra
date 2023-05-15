@@ -1,0 +1,7 @@
+---
+
+- name: Deploy Plex and Tautilli
+  community.docker.docker_compose:
+    project_name: plex
+    definition: "{{ plex_docker_compose }}"
+    pull: true

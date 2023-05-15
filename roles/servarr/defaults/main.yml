@@ -1,70 +1,22 @@
 ---
+# DEFAULT VARIABLES #
+# These can be overriden in the group_vars files or in the vault
+servarr_storage_location: ~/servarr
+servarr_puid: 0
+servarr_pgid: 0
 
-# geerlingguy.pip
-pip_install_packages:
-  - name: docker
-  - name: docker-compose
-
-# geerlingguy.docker
-docker_install_compose: true
-docker_compose_version: "1.26.0"
-docker_compose_arch: "{{ ansible_architecture }}"
-docker_compose_path: /usr/local/bin/docker-compose
-
-# caddy_ansible.caddy_ansible
-caddy_config: |
-  {{ servarr_domain }} {
-    reverse_proxy localhost:5055
-
-    route /sonarr* {
-      reverse_proxy localhost:8989
-    }
-    redir /sonarr /sonarr/
-
-    route /radarr* {
-      reverse_proxy localhost:7878
-    }
-    redir /radarr /radarr/
-
-    route /sabnzbd* {
-      reverse_proxy localhost:8080
-    }
-    redir /sabnzbd /sabnzbd/
-
-    route /lidarr* {
-      reverse_proxy localhost:8686
-    }
-    redir /lidarr /lidarr/
-
-
-    header {
-      Strict-Transport-Security max-age=15552000
-    }
-
-    tls logs@moras.dev {
-      dns cloudflare {{ cloudflare_dns_token }}
-    }
-  }
-caddy_update: true
-caddy_packages: [
-  "github.com/caddy-dns/cloudflare"
-]
-caddy_setcap: true
-caddy_systemd_capabilities_enabled: true
-caddy_systemd_capabilities: "CAP_NET_BIND_SERVICE"
-
-# docker-compose file
-docker_compose:
+# DOCKER COMPOSE #
+servarr_docker_compose:
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     volumes:
       - '{{ servarr_storage_location }}/lidarr:/config'
-      - '{{ servarr_storage_location }}/Music:/music'
+      - '{{ servarr_storage_location }}/music:/music'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
     environment:
-      - PUID=0
-      - PGID=0
+      - 'PUID={{ servarr_puid }}'
+      - 'PGID={{ servarr_pgid }}'
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -74,11 +26,11 @@ docker_compose:
     container_name: radarr
     volumes:
       - '{{ servarr_storage_location }}/radarr:/config'
-      - '{{ servarr_storage_location }}/Films:/movies'
+      - '{{ servarr_storage_location }}/films:/movies'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
     environment:
-      - PUID=0
-      - PGID=0
+      - 'PUID={{ servarr_puid }}'
+      - 'PGID={{ servarr_pgid }}'
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -88,11 +40,11 @@ docker_compose:
     container_name: sonarr
     volumes:
       - '{{ servarr_storage_location }}/sonarr:/config'
-      - '{{ servarr_storage_location }}/TV:/tv'
+      - '{{ servarr_storage_location }}/tv:/tv'
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
     environment:
-      - PUID=0
-      - PGID=0
+      - 'PUID={{ servarr_puid }}'
+      - 'PGID={{ servarr_pgid }}'
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -105,8 +57,8 @@ docker_compose:
       - '{{ servarr_storage_location }}/nzb/complete:/downloads'
       - '{{ servarr_storage_location }}/nzb/incomplete:/incomplete-downloads'
     environment:
-      - PUID=0
-      - PGID=0
+      - 'PUID={{ servarr_puid }}'
+      - 'PGID={{ servarr_pgid }}'
     ports:
       - 8080:8080
     restart: unless-stopped
@@ -117,8 +69,8 @@ docker_compose:
     volumes:
       - '{{ servarr_storage_location }}/overseerr:/config'
     environment:
-      - PUID=0
-      - PGID=0
+      - 'PUID={{ servarr_puid }}'
+      - 'PGID={{ servarr_pgid }}'
     ports:
       - 5055:5055
     restart: unless-stopped
