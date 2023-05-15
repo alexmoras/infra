@@ -24,7 +24,7 @@ caddy_config: |
     route /overseerr* {
       reverse_proxy localhost:5055
     }
-    redit /overseerr /overseerr/
+    redir /overseerr /overseerr/
 
     route /sonarr* {
       reverse_proxy localhost:8989
