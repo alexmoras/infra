@@ -40,7 +40,3 @@
 - name: Install Caddy Collection
   ansible.builtin.command:
     cmd: cscli parsers install crowdsecurity/caddy-logs
-
-- name: Link CrowdSec to web interface
-  ansible.builtin.command:
-    cmd: cscli console enroll {{ crowdsec_enroll_key }}
