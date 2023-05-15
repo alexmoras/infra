@@ -3,5 +3,5 @@
 - name: Deploy Authentik docker container
   community.docker.docker_compose:
     project_name: authentik
-    definition: "{{ docker_compose }}"
+    definition: "{{ authentik_docker_compose }}"
     pull: true

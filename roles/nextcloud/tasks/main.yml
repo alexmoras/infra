@@ -3,5 +3,5 @@
 - name: Deploy Nextcloud docker container
   community.docker.docker_compose:
     project_name: nextcloud
-    definition: "{{ docker_compose }}"
+    definition: "{{ nextcloud_docker_compose }}"
     pull: true

@@ -3,5 +3,5 @@
 - name: Deploy Paperless docker container
   community.docker.docker_compose:
     project_name: paperless
-    definition: "{{ docker_compose }}"
+    definition: "{{ paperless_docker_compose }}"
     pull: true
