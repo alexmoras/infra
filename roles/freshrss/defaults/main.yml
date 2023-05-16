@@ -1,8 +1,8 @@
 ---
 # DEFAULT VARIABLES #
 freshrss_storage_location: ~/freshrss
-freshrss_puid: 0
-freshrss_pgid: 0
+freshrss_puid: 33
+freshrss_pgid: 33
 
 # DOCKER COMPOSE #
 freshrss_docker_compose:
