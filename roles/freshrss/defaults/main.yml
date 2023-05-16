@@ -1,0 +1,21 @@
+---
+# DEFAULT VARIABLES #
+freshrss_storage_location: ~/freshrss
+freshrss_puid: 0
+freshrss_pgid: 0
+
+# DOCKER COMPOSE #
+freshrss_docker_compose:
+  version: "2.1"
+  services:
+    freshrss:
+      image: lscr.io/linuxserver/freshrss:latest
+      container_name: freshrss
+      environment:
+        - 'PUID={{ freshrss_puid }}'
+        - 'PGID={{ freshrss_pgid }}'
+      volumes:
+        - '{{ freshrss_storage_location }}:/config'
+      ports:
+        - 8200:80
+      restart: unless-stopped

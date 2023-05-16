@@ -1,0 +1,7 @@
+---
+
+- name: Deploy FreshRSS docker container
+  community.docker.docker_compose:
+    project_name: freshrss
+    definition: "{{ freshrss_docker_compose }}"
+    pull: true

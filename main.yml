@@ -90,3 +90,18 @@
         tags: servarr
       - role: plex
         tags: plex
+
+  - hosts: freshrss
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: geerlingguy.ntp
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
+      - role: geerlingguy.docker
+        tags: docker, freshrss
+      - role: geerlingguy.pip
+        tags: docker, freshrss
+      - role: freshrss
+        tags: freshrss
