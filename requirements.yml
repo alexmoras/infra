@@ -6,6 +6,7 @@ roles:
   - src: geerlingguy.ntp
   - src: weareinteractive.environment
   - src: caddy_ansible.caddy_ansible
+  - src: oefenweb.dnsmasq
 
 collections:
   - name: community.docker
