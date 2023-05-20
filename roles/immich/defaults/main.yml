@@ -2,7 +2,7 @@
 # DEFAULT VARIABLES #
 immich_storage_location: ~/immich
 immich_database_password: password
-typesense_api_key: apikeyhere
+immich_typesense_api_key: apikeyhere
 
 # DOCKER COMPOSE #
 immich_docker_compose:
@@ -24,7 +24,7 @@ immich_docker_compose:
         - IMMICH_WEB_URL=http://immich-web:3000
         - IMMICH_SERVER_URL=http://immich-server:3001
         - IMMICH_MACHINE_LEARNING_URL=http://immich-machine-learning:3003
-        - "TYPESENSE_API_KEY={{ typesense_api_key }}"
+        - "TYPESENSE_API_KEY={{ immich_typesense_api_key }}"
       depends_on:
         - redis
         - database
@@ -46,7 +46,7 @@ immich_docker_compose:
         - IMMICH_WEB_URL=http://immich-web:3000
         - IMMICH_SERVER_URL=http://immich-server:3001
         - IMMICH_MACHINE_LEARNING_URL=http://immich-machine-learning:3003
-        - "TYPESENSE_API_KEY={{ typesense_api_key }}"
+        - "TYPESENSE_API_KEY={{ immich_typesense_api_key }}"
       depends_on:
         - redis
         - database
@@ -68,7 +68,7 @@ immich_docker_compose:
         - IMMICH_WEB_URL=http://immich-web:3000
         - IMMICH_SERVER_URL=http://immich-server:3001
         - IMMICH_MACHINE_LEARNING_URL=http://immich-machine-learning:3003
-        - "TYPESENSE_API_KEY={{ typesense_api_key }}"
+        - "TYPESENSE_API_KEY={{ immich_typesense_api_key }}"
       restart: always
 
     immich-web:
@@ -84,14 +84,14 @@ immich_docker_compose:
         - IMMICH_WEB_URL=http://immich-web:3000
         - IMMICH_SERVER_URL=http://immich-server:3001
         - IMMICH_MACHINE_LEARNING_URL=http://immich-machine-learning:3003
-        - "TYPESENSE_API_KEY={{ typesense_api_key }}"
+        - "TYPESENSE_API_KEY={{ immich_typesense_api_key }}"
       restart: always
 
     typesense:
       container_name: immich_typesense
       image: typesense/typesense:0.24.0
       environment:
-        - "TYPESENSE_API_KEY={{ typesense_api_key }}"
+        - "TYPESENSE_API_KEY={{ immich_typesense_api_key }}"
         - TYPESENSE_DATA_DIR=/data
       logging:
         driver: none
@@ -120,13 +120,10 @@ immich_docker_compose:
       container_name: immich_proxy
       image: ghcr.io/immich-app/immich-proxy:release
       environment:
-        # Make sure these values get passed through from the env file
         - IMMICH_WEB_URL=http://immich-web:3000
         - IMMICH_SERVER_URL=http://immich-server:3001
       ports:
         - 2283:8080
-#      logging:typesense_api_key
-#        driver: none
       depends_on:
         - immich-server
       restart: always
