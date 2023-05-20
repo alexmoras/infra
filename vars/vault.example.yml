@@ -1,0 +1,105 @@
+---
+
+#--- EXAMPLE VAULT ---#
+# This is *very similar* to what my vault looks like but not an exact copy and missing some of the variables.
+#---------------------#
+
+# Generic settings
+root_domain: example.com
+
+# Nextcloud config (storage must be prefixed with '/')
+nextcloud_domain: cloud.example.com
+nextcloud_storage_location: /mnt/storage
+nextcloud_db_pass: secretgoeshere
+nextcloud_int_ip: 192.168.254.2
+
+# Immich config
+immich_domain: photos.example.com
+immich_storage_location: /mnt/storage
+immich_database_password: secretgoeshere
+immich_typesense_api_key: secretgoeshere
+immich_int_ip: 192.168.254.3
+
+# Authentik config
+authentik_domain: identity.example.com
+authentik_storage_location: /mnt/storage
+authentik_database_password: secretgoeshere
+authentik_secret_key: secretgoeshere
+authentik_int_ip: 192.168.254.4
+
+# Paperless config
+paperless_domain: archive.int.example.com
+paperless_storage_location: /mnt/storage
+paperless_database_password: secretgoeshere
+paperless_secret_key: secretgoeshere
+
+# Plex / Servarr config
+media_domain: media.int.example.com
+servarr_storage_location: /mnt/storage
+plex_storage_location: /mnt/storage
+
+# Docs config
+docs_domain: docs.int.example.com
+
+# FreshRSS config
+freshrss_domain: rss.int.example.com
+freshrss_storage_location: /mnt/storage
+
+# SMTP settings
+smtp_server: smtp.example.com
+smtp_port: 465
+smtp_from: no-reply@.example.com
+smtp_user: user@example.com
+smtp_pass: secretgoeshere
+smtp_tls: false
+smtp_ssl: true
+
+# Cloudflare DNS secrets - for the `moras.uk` zone only
+cloudflare_dns_token: secretgoeshere
+
+# CrowdSec secret
+crowdsec_enroll_key: secretgoeshere
+
+#--- DNSMASQ CONFIGURATION ---#
+# General Config
+dnsmasq_dhcp_config:
+  - domain=int.moras.uk
+  - rebind-domain-ok=/plex.direct/
+  # LAB (VLAN 10)
+  - dhcp-option=eth0.10,3,192.168.10.1
+  - dhcp-option=eth0.10,6,192.168.10.2
+  - dhcp-range=eth0.10,192.168.10.200,192.168.10.254,255.255.255.0,8h
+  # LAN (VLAN 20)
+  - dhcp-option=eth0.20,3,192.168.20.1
+  - dhcp-option=eth0.20,6,192.168.20.2
+  - dhcp-range=eth0.20,192.168.20.10,192.168.20.254,255.255.255.0,8h
+  # GUEST (VLAN 30)
+  - dhcp-option=eth0.30,3,192.168.30.1
+  - dhcp-option=eth0.30,6,192.168.30.2
+  - dhcp-range=eth0.30,192.168.30.10,192.168.30.254,255.255.255.0,8h
+  # IOT (VLAN 40)
+  - dhcp-option=eth0.40,3,192.168.40.1
+  - dhcp-option=eth0.40,6,192.168.40.2
+  - dhcp-range=eth0.40,192.168.40.200,192.168.40.254,255.255.255.0,8h
+
+# Static Mappings
+dnsmasq_dhcp_static:
+  # LAB
+  - dhcp-host=macaddresshere,192.168.10.10,pve             # Proxmox
+  - dhcp-host=macaddresshere,192.168.10.11,homeassistant   # Home Assistant
+  - dhcp-host=macaddresshere,192.168.10.12,bastion         # Caddy Bastion
+  - dhcp-host=macaddresshere,192.168.10.13,cloud           # Nextcloud
+  - dhcp-host=macaddresshere,192.168.10.14,photos          # Immich
+  - dhcp-host=macaddresshere,192.168.10.15,identity        # Authentik
+  - dhcp-host=macaddresshere,192.168.10.16,download        # Servarr
+  - dhcp-host=macaddresshere,192.168.10.17,media           # Plex
+  - ... more static mappings here
+  #IOT
+
+
+# DNS Overrides
+dnsmasq_dns_overrides:
+  # Bastion overrides (must point to bastion IP - 192.168.10.12)
+  - address=/cloud.example.com/192.168.10.12
+  - address=/photos.example.com/192.168.10.12
+  - address=/identity.example.com/192.168.10.12
