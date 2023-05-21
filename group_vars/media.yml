@@ -5,12 +5,6 @@ pip_install_packages:
   - name: docker
   - name: docker-compose
 
-# geerlingguy.docker
-docker_install_compose: true
-docker_compose_version: "v2.18.1"
-docker_compose_arch: "{{ ansible_architecture }}"
-docker_compose_path: /usr/local/bin/docker-compose
-
 # caddy_ansible.caddy_ansible
 caddy_config: |
   {{ media_domain }} {
