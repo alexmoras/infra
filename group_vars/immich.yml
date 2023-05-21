@@ -1,7 +1,6 @@
 ---
+
 # geerlingguy.pip
 pip_install_packages:
   - name: docker
-
-# geerlingguy.docker
-docker_compose_version: 1.29.2
+  - name: docker-compose
