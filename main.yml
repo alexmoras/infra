@@ -41,8 +41,8 @@
       - role: geerlingguy.ntp
       - role: geerlingguy.docker
         tags: docker, immich
- #     - role: geerlingguy.pip
- #       tags: docker, immich
+      - role: geerlingguy.pip
+        tags: docker, immich
       - role: immich
         tags: immich
 
