@@ -1,0 +1,33 @@
+---
+
+# DEFAULT VARIABLES #
+authelia_storage_location: /root/authelia
+
+# DOCKER COMPOSE #
+authelia_docker_compose:
+  services:
+    authelia:
+      image: authelia/authelia
+      container_name: authelia
+      volumes:
+        - '{{ authelia_storage_location }}:/config'
+      networks:
+        - net
+      ports:
+        - 9091:9091
+      restart: unless-stopped
+      environment:
+        - TZ=Europe/London
+    
+    redis:
+      image: redis:alpine
+      container_name: redis
+      volumes:
+        - redis:/data
+      restart: unless-stopped
+      environment:
+        - TZ=Europe/London
+  
+  volumes:
+    redis:
+      driver: local

@@ -2,15 +2,21 @@
 
 - name: ensure target dir exists
   file:
-    dest: "/root/authelia/"
+    dest: "{{ authelia_storage_location }}/"
     state: directory
 
 - name: template authelia users
   template:
     src: templates/users.yml.j2
-    dest: "/root/authelia/users_database.yml"
+    dest: "{{ authelia_storage_location }}/users_database.yml"
 
 - name: template authelia config
   template:
     src: templates/configuration.yml.j2
-    dest: "/root/authelia/configuration.yml"
+    dest: "{{ authelia_storage_location }}/configuration.yml"
+
+- name: Deploy Authentik docker container
+  community.docker.docker_compose:
+    project_name: authelia
+    definition: "{{ authelia_docker_compose }}"
+    pull: true

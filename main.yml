@@ -46,18 +46,16 @@
       - role: immich
         tags: immich
 
-  - hosts: authentik
+  - hosts: identity
     vars_files:
       - 'vars/vault.yml'
     roles:
       - role: grog.package
       - role: geerlingguy.ntp
       - role: geerlingguy.docker
-        tags: docker, authentik
+        tags: docker
       - role: geerlingguy.pip
-        tags: docker, authentik
-      - role: authentik
-        tags: authentik
+        tags: docker
       - role: authelia
         tags: authelia
 
