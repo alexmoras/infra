@@ -13,7 +13,7 @@ authelia_encryption_key: enc123
 authelia_hmac_secret: dcba123
 
 authelia_users:
-  alex:
+  - username: alex
     disabled: false
     displayname: "Alex Moras"
     password: "$argon2id$v=19$m=65536,t=3,p=2$BpLnfgDsc2WD8F2q$o/vzA4myCqZZ36bUGsDY//8mKUYNZZaR0t4MFFSs+iM"
