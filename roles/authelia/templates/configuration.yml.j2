@@ -53,7 +53,7 @@ notifier:
   smtp:
     username: {{ smtp_user }}
     # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
-    password: {{ smtp_password }}
+    password: {{ smtp_pass }}
     host: {{ smtp_server }}
     port: {{ smtp_port }}
     sender: "Moras Identity Service <{{ smtp_from }}>"
