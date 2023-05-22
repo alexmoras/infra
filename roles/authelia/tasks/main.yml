@@ -1,0 +1,16 @@
+---
+
+- name: ensure target dir exists
+  file:
+    dest: "/root/authelia/"
+    state: directory
+
+- name: template authelia users
+  template:
+    src: templates/users.yml.j2
+    dest: "/root/authelia/users_database.yml"
+
+- name: template authelia config
+  template:
+    src: templates/configuration.yml.j2
+    dest: "/root/authelia/configuration.yml"

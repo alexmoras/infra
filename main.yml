@@ -58,7 +58,9 @@
         tags: docker, authentik
       - role: authentik
         tags: authentik
-  
+      - role: authelia
+        tags: authelia
+
   - hosts: paperless
     vars_files:
       - 'vars/vault.yml'
