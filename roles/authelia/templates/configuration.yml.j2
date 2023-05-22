@@ -96,7 +96,7 @@ identity_providers:
           - {{ scope }}
 {% endfor %}
         redirect_uris:
-{% for redirect in client.redirect_uris $}
+{% for redirect in client.redirect_uris %}
           - {{ redirect }}
 {% endfor %}
         grant_types:
