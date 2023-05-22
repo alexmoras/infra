@@ -8,7 +8,7 @@
 # List of users
 users:
 {% for u in authelia_users %}
-  {{ u.username }}:
+  {{ u }}:
     disabled: {{ u.disabled }}
     displayname: {{ u.displayname }}
     password: {{ u.password }}
