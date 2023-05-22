@@ -68,9 +68,9 @@ identity_providers:
   oidc:
     hmac_secret: {{ authelia_hmac_secret }}
     issuer_certificate_chain: |
-      {{ authelia_issuer_certificate_chain | from_yaml(indent=6) }}
+      {{ authelia_issuer_certificate_chain | indent(width=6, indent=true) }}
     issuer_private_key: |
-      {{ authelia_issuer_private_key | from_yaml(indent=6) }}
+      {{ authelia_issuer_private_key | indent(width=6, indent=true) }}
     access_token_lifespan: 1h
     authorize_code_lifespan: 1m
     id_token_lifespan: 1h
