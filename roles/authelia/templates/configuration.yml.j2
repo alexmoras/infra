@@ -57,8 +57,11 @@ notifier:
     host: {{ smtp_server }}
     port: {{ smtp_port }}
     sender: "Moras Identity Service <{{ smtp_from }}>"
-  filesystem:
-    filename: /config/notification.txt
+#  filesystem:
+#    filename: /config/notification.txt
+
+access_control:
+  default_policy: two_factor
 
 identity_providers:
   oidc:
