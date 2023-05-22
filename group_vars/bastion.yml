@@ -33,8 +33,8 @@ caddy_config: |
     }
   }
 
-  {{ authentik_domain }} {
-    reverse_proxy {{ authentik_int_ip }}:9000
+  {{ authelia_domain }} {
+    reverse_proxy {{ authelia_int_ip }}:9091
 
     log {
       output file /var/log/caddy/access.log
