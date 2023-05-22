@@ -20,3 +20,4 @@
     project_name: authelia
     definition: "{{ authelia_docker_compose }}"
     pull: true
+    recreate: true

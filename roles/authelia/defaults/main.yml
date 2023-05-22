@@ -25,7 +25,6 @@ authelia_docker_compose:
       restart: unless-stopped
       environment:
         - TZ=Europe/London
-  
   volumes:
     redis:
       driver: local
