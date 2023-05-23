@@ -34,6 +34,7 @@ plex_docker_compose:
         - 'PGID={{ plex_pgid }}'
       volumes:
         - '{{ plex_storage_location }}/tautulli:/config'
+        - '{{ plex_storage_location }}/plex:/plex'
       ports:
         - 8181:8181
       restart: unless-stopped
