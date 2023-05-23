@@ -15,11 +15,6 @@ caddy_config: |
     }
     redir /tautulli /tautulli/
     
-    route /overseerr* {
-      reverse_proxy localhost:5055
-    }
-    redir /overseerr /overseerr/
-
     route /sonarr* {
       reverse_proxy localhost:8989
     }
@@ -39,6 +34,17 @@ caddy_config: |
       reverse_proxy localhost:8686
     }
     redir /lidarr /lidarr/
+
+    header {
+      Strict-Transport-Security max-age=15552000
+    }
+
+    tls logs@moras.dev {
+      dns cloudflare {{ cloudflare_dns_token }}
+    }
+  }
+  {{ overseerr_domain }} {
+    reverse_proxy localhost:5055
 
     header {
       Strict-Transport-Security max-age=15552000
