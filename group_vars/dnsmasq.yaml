@@ -2,6 +2,6 @@
 
 dnsmasq_service_enabled: true
 dnsmasq_dnsmasq_d_files_present:
-  00-dhcp-config: {{ dnsmasq_dhcp_config }}
-  01-dhcp-static: {{ dnsmasq_dhcp_static }}
-  02-dns-overrides: {{ dnsmasq_dns_overrides }}
+  00-dhcp-config: '{{ dnsmasq_dhcp_config }}'
+  01-dhcp-static: '{{ dnsmasq_dhcp_static }}'
+  02-dns-overrides: '{{ dnsmasq_dns_overrides }}'
