@@ -105,3 +105,9 @@
         tags: docker, freshrss
       - role: freshrss
         tags: freshrss
+
+  - hosts: dnsmasq
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: oefenweb.dnsmasq
