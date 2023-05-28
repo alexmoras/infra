@@ -12,7 +12,7 @@ immich_docker_compose:
     immich-server:
       container_name: immich_server
       image: ghcr.io/immich-app/immich-server:release
-      entrypoint: ["/bin/sh", "./start-server.sh"]
+      command: ["start-server.sh"]
       volumes:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
       environment:
@@ -34,7 +34,7 @@ immich_docker_compose:
     immich-microservices:
       container_name: immich_microservices
       image: ghcr.io/immich-app/immich-server:release
-      entrypoint: ["/bin/sh", "./start-microservices.sh"]
+      command: ["start-microservices.sh"]
       volumes:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
       environment:
@@ -74,7 +74,6 @@ immich_docker_compose:
     immich-web:
       container_name: immich_web
       image: ghcr.io/immich-app/immich-web:release
-      entrypoint: ["/bin/sh", "./entrypoint.sh"]
       environment:
         - DB_HOSTNAME=immich_postgres
         - DB_USERNAME=immich
