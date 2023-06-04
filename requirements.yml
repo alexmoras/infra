@@ -8,6 +8,7 @@ roles:
   - src: caddy_ansible.caddy_ansible
   - src: oefenweb.dnsmasq
   - src: bertvv.mariadb
+  - src: geerlingguy.adminer
 
 collections:
   - name: community.docker

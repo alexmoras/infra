@@ -116,4 +116,8 @@
     vars_files:
       - 'vars/vault.yml'
     roles:
+      - role: grog.package
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
       - role: bertvv.mariadb
+      - role: geerlingguy.adminer
