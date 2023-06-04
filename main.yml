@@ -111,3 +111,9 @@
       - 'vars/vault.yml'
     roles:
       - role: oefenweb.dnsmasq
+  
+  - hosts: database
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: bertvv.mariadb
