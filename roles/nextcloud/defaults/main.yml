@@ -10,18 +10,6 @@ nextcloud_domain: nextcloud
 nextcloud_docker_compose:
   version: '2'
   services:
-    db:
-      image: mariadb:10.6
-      restart: always
-      command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
-      volumes:
-        - "{{ nextcloud_storage_location }}/database:/var/lib/mysql"
-      environment:
-        - "MYSQL_ROOT_PASSWORD={{ nextcloud_db_pass }}"
-        - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
-        - MYSQL_DATABASE=nextcloud
-        - MYSQL_USER=nextcloud
-
     app:
       image: nextcloud
       restart: always
@@ -50,7 +38,6 @@ nextcloud_docker_compose:
       ports:
         - 8080:80
       depends_on:
-        - db
         - redis
         - cron
     
