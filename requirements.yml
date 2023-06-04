@@ -9,6 +9,7 @@ roles:
   - src: oefenweb.dnsmasq
   - src: bertvv.mariadb
   - src: geerlingguy.adminer
+  - src: geerlingguy.postgresql
 
 collections:
   - name: community.docker

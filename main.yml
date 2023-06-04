@@ -119,5 +119,6 @@
       - role: grog.package
       - role: caddy_ansible.caddy_ansible
         tags: caddy
+      - role: geerlingguy.postgresql
       - role: bertvv.mariadb
       - role: geerlingguy.adminer
