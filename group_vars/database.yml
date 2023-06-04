@@ -1,10 +1,12 @@
 ---
 
 package_list:
+  - name: sudo
   - name: php
   - name: php-fpm
   - name: php-cli
   - name: php-mysql
+  - name: php-pgsql
   - name: php-mbstring
 
 # caddy_ansible.caddy_ansible
