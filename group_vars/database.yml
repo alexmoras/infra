@@ -11,7 +11,7 @@ package_list:
 caddy_config: |
   {{ db_domain }} {
     root * /var/www/adminer
-    php_fastcgi /var/run/php/php-fpm.sock
+    php_fastcgi unix//run/php/php7.4-fpm.sock
     file_server
 
     tls logs@moras.dev {
