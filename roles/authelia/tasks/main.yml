@@ -5,11 +5,6 @@
     dest: "{{ authelia_storage_location }}/"
     state: directory
 
-- name: template authelia users
-  template:
-    src: templates/users.yml.j2
-    dest: "{{ authelia_storage_location }}/users_database.yml"
-
 - name: template authelia config
   template:
     src: templates/configuration.yml.j2
