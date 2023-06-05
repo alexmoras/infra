@@ -23,10 +23,10 @@ nextcloud_docker_compose:
         - OVERWRITEPROTOCOL=https
         - "NEXTCLOUD_TRUSTED_DOMAINS={{ nextcloud_domain }}"
         - APACHE_DISABLE_REWRITE_IP=1
-        - "MYSQL_PASSWORD={{ nextcloud_db_pass }}"
-        - MYSQL_DATABASE=nextcloud
-        - MYSQL_USER={{ nextcloud_db_user }}
-        - MYSQL_HOST={{ nextcloud_db_host }}
+        - "POSTGRES_PASSWORD={{ nextcloud_db_pass }}"
+        - POSTGRES_DB=nextcloud
+        - POSTGRES_USER={{ nextcloud_db_user }}
+        - POSTGRES_HOST={{ nextcloud_db_host }}
         - REDIS_HOST=redis
         - NEXTCLOUD_DATA_DIR=/data
         - "SMTP_HOST={{ smtp_server }}"
