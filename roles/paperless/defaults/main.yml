@@ -20,7 +20,6 @@ paperless_docker_compose:
       image: ghcr.io/paperless-ngx/paperless-ngx:latest
       restart: unless-stopped
       depends_on:
-        - db
         - broker
       ports:
         - "8000:8000"
