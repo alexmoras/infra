@@ -2,7 +2,6 @@
 # DEFAULT VARIABLES #
 nextcloud_storage_location: ~/nextcloud
 nextcloud_db_host: db
-nextcloud_db_user: nextcloud
 nextcloud_db_pass: password
 nextcloud_domain: nextcloud
 
@@ -25,8 +24,8 @@ nextcloud_docker_compose:
         - APACHE_DISABLE_REWRITE_IP=1
         - "POSTGRES_PASSWORD={{ nextcloud_db_pass }}"
         - POSTGRES_DB=nextcloud
-        - POSTGRES_USER={{ nextcloud_db_user }}
-        - POSTGRES_HOST={{ nextcloud_db_host }}
+        - POSTGRES_USER=nextcloud
+        - "POSTGRES_HOST={{ nextcloud_db_host }}"
         - REDIS_HOST=redis
         - NEXTCLOUD_DATA_DIR=/data
         - "SMTP_HOST={{ smtp_server }}"

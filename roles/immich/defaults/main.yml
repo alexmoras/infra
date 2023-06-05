@@ -1,6 +1,7 @@
 ---
 # DEFAULT VARIABLES #
 immich_storage_location: ~/immich
+immich_db_host: db
 immich_database_password: password
 immich_typesense_api_key: apikeyhere
 
@@ -16,7 +17,7 @@ immich_docker_compose:
       volumes:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
       environment:
-        - "DB_HOSTNAME={{ db_domain }}"
+        - "DB_HOSTNAME={{ immich_db_host }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich
@@ -37,7 +38,7 @@ immich_docker_compose:
       volumes:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
       environment:
-        - "DB_HOSTNAME={{ db_domain }}"
+        - "DB_HOSTNAME={{ immich_db_host }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich
@@ -58,7 +59,7 @@ immich_docker_compose:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
         - model-cache:/cache
       environment:
-        - "DB_HOSTNAME={{ db_domain }}"
+        - "DB_HOSTNAME={{ immich_db_host }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich
@@ -73,7 +74,7 @@ immich_docker_compose:
       container_name: immich_web
       image: ghcr.io/immich-app/immich-web:release
       environment:
-        - "DB_HOSTNAME={{ db_domain }}"
+        - "DB_HOSTNAME={{ immich_db_host }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich

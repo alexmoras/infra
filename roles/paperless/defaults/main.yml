@@ -1,5 +1,6 @@
 ---
 # DEFAULT VARIABLES #
+paperless_database_host: db
 paperless_database_password: password
 paperless_storage_location: ~/paperless
 paperless_domain: paperless
@@ -14,18 +15,6 @@ paperless_docker_compose:
       restart: unless-stopped
       volumes:
         - redis:/data
-
-    db:
-      image: mariadb:10
-      restart: unless-stopped
-      volumes:
-        - "{{ paperless_storage_location }}/database:/var/lib/mysql"
-      environment:
-        - MARIADB_HOST=paperless
-        - MARIADB_DATABASE=paperless
-        - MARIADB_USER=paperless
-        - "MARIADB_PASSWORD={{ paperless_database_password }}"
-        - "MARIADB_ROOT_PASSWORD={{ paperless_database_password }}"
 
     webserver:
       image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -47,11 +36,12 @@ paperless_docker_compose:
         - "{{ paperless_storage_location }}/consume:/usr/src/paperless/consume"
       environment:
         - PAPERLESS_REDIS=redis://broker:6379
-        - PAPERLESS_DBENGINE=mariadb
-        - PAPERLESS_DBHOST=db
+        - PAPERLESS_DBENGINE=postgresql
+        - "PAPERLESS_DBHOST={{ paperless_database_host }}"
         - PAPERLESS_DBUSER=paperless
+        - PAPERLESS_DBNAME=paperless
         - "PAPERLESS_DBPASS={{ paperless_database_password }}"
-        - PAPERLESS_DBPORT=3306
+        - PAPERLESS_DBPORT=5432
         - PAPERLESS_OCR_LANGUAGE=eng+cym
         - PAPERLESS_OCR_LANGUAGES=eng cym
         - PAPERLESS_TIME_ZONE=Europe/London
