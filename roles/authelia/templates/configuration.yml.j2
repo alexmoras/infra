@@ -18,21 +18,21 @@ webauthn:
 authentication_backend:
   ldap:
     implementation: custom
-    url: ldap://lldap
+    url: ldap://lldap:3890
     timeout: 5s
     start_tls: false
     base_dn: {{ lldap_base_dn }}
-    additional_users_dn: OU=users
+    additional_users_dn: OU=people
     users_filter: (&({username_attribute}={input})(objectClass=person))
     username_attribute: uid
     mail_attribute: mail
     display_name_attribute: displayName
     additional_groups_dn: OU=groups
-    groups_filter: (&(member={dn})(objectClass=groupOfNames))
+    groups_filter: (member={dn})
     group_name_attribute: cn
     permit_referrals: false
     permit_unauthenticated_bind: false
-    user: CN=admin,{{ lldap_base_dn }}
+    user: uid=admin,ou=people,{{ lldap_base_dn }}
     password: {{ lldap_user_pass }}
 
 session:
