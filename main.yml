@@ -121,6 +121,3 @@
         tags: caddy
       - role: geerlingguy.postgresql
         tags: postgresql
-      - role: bertvv.mariadb
-        tags: mariadb
-      - role: geerlingguy.adminer

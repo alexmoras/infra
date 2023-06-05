@@ -16,7 +16,7 @@ immich_docker_compose:
       volumes:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
       environment:
-        - DB_HOSTNAME=immich_postgres
+        - "DB_HOSTNAME={{ db_domain }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich
@@ -27,7 +27,6 @@ immich_docker_compose:
         - "TYPESENSE_API_KEY={{ immich_typesense_api_key }}"
       depends_on:
         - redis
-        - database
         - typesense
       restart: always
 
@@ -38,7 +37,7 @@ immich_docker_compose:
       volumes:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
       environment:
-        - DB_HOSTNAME=immich_postgres
+        - "DB_HOSTNAME={{ db_domain }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich
@@ -49,7 +48,6 @@ immich_docker_compose:
         - "TYPESENSE_API_KEY={{ immich_typesense_api_key }}"
       depends_on:
         - redis
-        - database
         - typesense
       restart: always
 
@@ -60,7 +58,7 @@ immich_docker_compose:
         - "{{ immich_storage_location }}/photos:/usr/src/app/upload"
         - model-cache:/cache
       environment:
-        - DB_HOSTNAME=immich_postgres
+        - "DB_HOSTNAME={{ db_domain }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich
@@ -75,7 +73,7 @@ immich_docker_compose:
       container_name: immich_web
       image: ghcr.io/immich-app/immich-web:release
       environment:
-        - DB_HOSTNAME=immich_postgres
+        - "DB_HOSTNAME={{ db_domain }}"
         - DB_USERNAME=immich
         - "DB_PASSWORD={{ immich_database_password }}"
         - DB_DATABASE_NAME=immich
@@ -101,18 +99,6 @@ immich_docker_compose:
     redis:
       container_name: immich_redis
       image: redis:6.2
-      restart: always
-
-    database:
-      container_name: immich_postgres
-      image: postgres:14
-      environment:
-        - "POSTGRES_PASSWORD={{ immich_database_password }}"
-        - POSTGRES_USER=immich
-        - POSTGRES_DB=immich
-        - PG_DATA=/var/lib/postgresql/data
-      volumes:
-        - "{{ immich_storage_location }}/database:/var/lib/postgresql/data"
       restart: always
 
     immich-proxy:
