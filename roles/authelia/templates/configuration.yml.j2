@@ -16,14 +16,24 @@ webauthn:
   display_name: Moras Identity Service
 
 authentication_backend:
-  file:
-    path: /config/users_database.yml
-    password:
-      algorithm: argon2id
-      iterations: 1
-      salt_length: 16
-      parallelism: 8
-      memory: 64
+  ldap:
+    implementation: custom
+    url: ldap://lldap
+    timeout: 5s
+    start_tls: false
+    base_dn: {{ lldap_base_dn }}
+    additional_users_dn: OU=users
+    users_filter: (&({username_attribute}={input})(objectClass=person))
+    username_attribute: uid
+    mail_attribute: mail
+    display_name_attribute: displayName
+    additional_groups_dn: OU=groups
+    groups_filter: (&(member={dn})(objectClass=groupOfNames))
+    group_name_attribute: cn
+    permit_referrals: false
+    permit_unauthenticated_bind: false
+    user: CN=admin,{{ lldap_base_dn }}
+    password: {{ lldap_user_pass }}
 
 session:
   name: authelia_session
@@ -45,9 +55,13 @@ regulation:
   ban_time: 300
 
 storage:
-  local:
-    path: /config/db.sqlite3
-  encryption_key: {{ authelia_encryption_key }}
+  postgres:
+    host: {{ authelia_db_host }}
+    port: 5432
+    database: authelia
+    schema: public
+    username: authelia
+    password: {{ authelia_db_password }}
 
 notifier:
   smtp:

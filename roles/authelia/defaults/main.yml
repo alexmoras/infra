@@ -25,6 +25,26 @@ authelia_docker_compose:
       restart: unless-stopped
       environment:
         - TZ=Europe/London
+    
+    lldap:
+      image: nitnelave/lldap:stable
+      ports:
+        # For LDAP
+        - "3890:3890"
+        # For the web front-end
+        - "17170:17170"
+      volumes:
+        - "lldap_data:/data"
+      environment:
+        - UID=0
+        - GID=0
+        - TZ=Europe/London
+        - "LLDAP_JWT_SECRET={{ lldap_jwt_secret }}"
+        - "LLDAP_LDAP_USER_PASS={{ lldap_user_pass }}"
+        - "LLDAP_LDAP_BASE_DN={{ lldap_base_dn }}"
+        - "LLDAP_DATABASE_URL={{ lldap_postgres_url }}"
   volumes:
     redis:
+      driver: local
+    lldap_data:
       driver: local
