@@ -15,7 +15,7 @@ vaultwarden_docker_compose:
         - "SMTP_HOST={{ smtp_server }}"
         - "SMTP_FROM={{ smtp_from }}"
         - "SMTP_PORT={{ smtp_port }}"
-        - SMTP_SECURITY=ssl
+        - SMTP_SECURITY=force_tls
         - "SMTP_USERNAME={{ smtp_user }}"
         - "SMTP_PASSWORD={{ smtp_pass }}"
         - "DATABASE_URL={{ vaultwarden_database_url }}"
