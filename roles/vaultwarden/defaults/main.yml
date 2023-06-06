@@ -1,0 +1,28 @@
+---
+# DOCKER COMPOSE #
+vaultwarden_docker_compose:
+  version: '3'
+
+  services:
+    vaultwarden:
+      image: vaultwarden/server:latest
+      container_name: vaultwarden
+      restart: always
+      ports:
+        - 80:80
+      environment:
+        - WEBSOCKET_ENABLED="true"
+        - "SMTP_HOST={{ smtp_server }}"
+        - "SMTP_FROM={{ smtp_from }}"
+        - "SMTP_PORT={{ smtp_port }}"
+        - SMTP_SECURITY=ssl
+        - "SMTP_USERNAME={{ smtp_user }}"
+        - "SMTP_PASSWORD={{ smtp_pass }}"
+        - "DATABASE_URL={{ vaultwarden_database_url }}"
+        - "ADMIN_TOKEN={{ vaultwarden_admin_token }}"
+      volumes:
+        - vw-data:/data
+
+  volumes:
+    vw-data:
+      driver: local

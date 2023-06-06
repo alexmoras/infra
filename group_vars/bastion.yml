@@ -45,6 +45,19 @@ caddy_config: |
     }
   }
 
+  {{ vaultwarden_domain }} {
+    reverse_proxy {{ vaultwarden_int_ip }}:9091
+
+    log {
+      output file /var/log/caddy/access.log
+    }
+
+    tls logs@moras.dev {
+      dns cloudflare {{ cloudflare_dns_token }}
+    }
+  }
+
+
 caddy_update: true
 caddy_packages: [
   "github.com/caddy-dns/cloudflare"

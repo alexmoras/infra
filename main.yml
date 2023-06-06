@@ -121,3 +121,18 @@
         tags: caddy
       - role: geerlingguy.postgresql
         tags: postgresql
+  
+  - hosts: vaultwarden
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: geerlingguy.ntp
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
+      - role: geerlingguy.docker
+        tags: docker, vaultwarden
+      - role: geerlingguy.pip
+        tags: docker, vaultwarden
+      - role: vaultwarden
+        tags: vaultwarden
