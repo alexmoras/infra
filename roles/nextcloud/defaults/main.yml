@@ -12,8 +12,6 @@ nextcloud_docker_compose:
     app:
       image: nextcloud
       restart: always
-      links:
-        - db
       volumes:
         - "{{ nextcloud_storage_location }}/html:/var/www/html"
         - "{{ nextcloud_storage_location }}/storage:/data"
