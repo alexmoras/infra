@@ -43,6 +43,8 @@ authelia_docker_compose:
         - "LLDAP_LDAP_USER_PASS={{ lldap_user_pass }}"
         - "LLDAP_LDAP_BASE_DN={{ lldap_base_dn }}"
         - "LLDAP_DATABASE_URL={{ lldap_postgres_url }}"
+      restart: unless-stopped
+
   volumes:
     redis:
       driver: local
