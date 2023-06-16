@@ -1,0 +1,11 @@
+---
+
+- name: Create directory if it does not exist
+  ansible.builtin.file:
+    path: ~/.config/pip
+    state: directory
+
+- name: Add Pip config options to break packages
+  ansible.builtin.file:
+    src: files/pip.conf
+    dest: ~/.config/pip
