@@ -6,6 +6,6 @@
     state: directory
 
 - name: Add Pip config options to break packages
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: files/pip.conf
     dest: ~/.config/pip
