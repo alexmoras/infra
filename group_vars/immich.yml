@@ -1,12 +1,6 @@
 ---
 
-package_list:
-  - name: python3
-  - name: python3-venv
-
 # geerlingguy.pip
 pip_install_packages:
   - name: docker
-    virtualenv: ~/.venv
   - name: docker-compose
-    virtualenv: ~/.venv
