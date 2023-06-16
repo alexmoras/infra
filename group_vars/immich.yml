@@ -3,4 +3,6 @@
 # geerlingguy.pip
 pip_install_packages:
   - name: docker
+    virtualenv: ~/.venv
   - name: docker-compose
+    virtualenv: ~/.venv
