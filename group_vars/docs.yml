@@ -3,6 +3,8 @@
 # geerlingguy.pip
 pip_install_packages:
   - name: mkdocs
+  - name: mkdocs-material
+  - name: mkdocs-awesome-pages-plugin
 
 # caddy_ansible.caddy_ansible
 caddy_config: |
