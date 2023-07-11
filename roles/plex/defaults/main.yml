@@ -24,6 +24,8 @@ plex_docker_compose:
         - '{{ plex_storage_location }}/tv:/tv'
         - '{{ plex_storage_location }}/films:/movies'
         - '{{ plex_storage_location }}/music:/music'
+      devices:
+        - /dev/dri:/dev/dri
       restart: unless-stopped
 
     tautulli:
