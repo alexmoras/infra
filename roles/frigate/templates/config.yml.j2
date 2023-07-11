@@ -17,9 +17,11 @@ database:
 go2rtc:
   streams:
 {% for camera in frigate_cameras %}
-    {{ camera.stream }}:
 {% for stream in camera.stream %}
-      - {{ stream }}
+    {{ stream }}:
+{% for config in stream %}
+      - {{ config }}
+{% endfor %}
 {% endfor %}
 {% endfor %}
 
