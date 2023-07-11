@@ -1,0 +1,26 @@
+mqtt:
+  enabled: True
+  host: {{ mqtt_host }}
+  port: {{ mqtt_port }}
+  user: {{ mqtt_user }}
+  password: {{ mqtt_password }}
+
+detectors:
+  detector_name:
+    type: openvino
+
+database:
+  path: {{ frigate_storage_location }}/frigate.db
+
+
+# JINJA TEMPLATE TO ADD CAMERAS - USE VAULT TO DEFINE NEW CAMERAS
+go2rtc:
+  streams:
+{% for camera in frigate_cameras %}
+    {{ camera.stream }}:
+{% endfor %}
+
+cameras:
+{% for camera in frigate_cameras %}
+  {{ camera.config }}
+{% endfor %}

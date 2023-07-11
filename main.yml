@@ -142,3 +142,17 @@
         tags: docker, vaultwarden
       - role: vaultwarden
         tags: vaultwarden
+
+  - hosts: cctv
+    vars_files:
+      - 'vars/vault.yml'
+    roles:
+      - role: grog.package
+      - role: pip-fix
+      - role: geerlingguy.ntp
+      - role: geerlingguy.docker
+        tags: docker, frigate
+      - role: geerlingguy.pip
+        tags: docker, frigate
+      - role: frigate
+        tags: frigate
