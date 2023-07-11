@@ -22,5 +22,6 @@ go2rtc:
 
 cameras:
 {% for camera in frigate_cameras %}
-  {{ camera.config }}
+  {{ camera.name }}
+    {{ camera.config }}
 {% endfor %}
