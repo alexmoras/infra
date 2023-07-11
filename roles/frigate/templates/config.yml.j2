@@ -18,7 +18,7 @@ go2rtc:
   streams:
 {% for camera in frigate_cameras %}
 {% for stream in camera.streams %}
-    {{ stream.name }}:
+    {{ stream }}:
 {% for item in stream %}
       - {{ item }}
 {% endfor %}
