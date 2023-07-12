@@ -2,7 +2,6 @@
 
 # DEFAULT VARIABLES #
 frigate_storage_location: /root/frigate
-frigate_rtsp_password: frigate
 
 # Docker Compose
 frigate_docker_compose:
@@ -29,5 +28,3 @@ frigate_docker_compose:
         - "8554:8554" # RTSP feeds
         - "8555:8555/tcp" # WebRTC over tcp
         - "8555:8555/udp" # WebRTC over udp
-      environment:
-        - 'FRIGATE_RTSP_PASSWORD={{ frigate_rtsp_password }}'

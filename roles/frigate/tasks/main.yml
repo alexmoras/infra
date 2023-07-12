@@ -10,9 +10,9 @@
     src: templates/config.yml.j2
     dest: "{{ frigate_storage_location }}/config.yml"
 
-#- name: Deploy frigate docker container
-#  community.docker.docker_compose:
-#    project_name: frigate
-#    definition: "{{ frigate_docker_compose }}"
-#    pull: true
-#    recreate: always
+- name: Deploy frigate docker container
+  community.docker.docker_compose:
+    project_name: frigate
+    definition: "{{ frigate_docker_compose }}"
+    pull: true
+    recreate: always
