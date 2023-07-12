@@ -53,7 +53,12 @@ cameras:
     record:
       enabled: True
       retain:
-        days: 28
+        days: 7
+        mode: motion
+      events:
+        retain:
+          default: 28
+          mode: active_objects
   cctv-side:
     ffmpeg:
       inputs:
@@ -71,7 +76,12 @@ cameras:
     record:
       enabled: True
       retain:
-        days: 28
+        days: 7
+        mode: motion
+      events:
+        retain:
+          default: 28
+          mode: active_objects
   cctv-rear:
     ffmpeg:
       inputs:
@@ -89,4 +99,9 @@ cameras:
     record:
       enabled: True
       retain:
-        days: 28
+        days: 7
+        mode: motion
+      events:
+        retain:
+          default: 28
+          mode: active_objects
