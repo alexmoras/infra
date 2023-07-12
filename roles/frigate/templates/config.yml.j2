@@ -27,13 +27,13 @@ go2rtc:
   streams:
     cctv-front:
       - rtsp://{{ frigate_user }}:{{ frigate_password }}@cctv-front.int.moras.uk:554/h264Preview_01_main
-      - "ffmpeg:cctv-front#video=h264"
+      - "ffmpeg:cctv-front"
     cctv-side:
       - rtsp://{{ frigate_user }}:{{ frigate_password }}@cctv-side.int.moras.uk:554/h264Preview_01_main
-      - "ffmpeg:cctv-side#video=h264"
+      - "ffmpeg:cctv-side"
     cctv-rear:
       - rtsp://{{ frigate_user }}:{{ frigate_password }}@cctv-rear.int.moras.uk:554/h264Preview_01_main
-      - "ffmpeg:cctv-side#video=h264"
+      - "ffmpeg:cctv-side"
 
 cameras:
   cctv-front:
