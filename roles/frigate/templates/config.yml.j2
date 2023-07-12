@@ -57,7 +57,7 @@ cameras:
         mode: motion
       events:
         retain:
-          default: 28
+          default: 7
           mode: active_objects
     zones:
       driveway:
@@ -66,6 +66,9 @@ cameras:
         coordinates: 219,189,269,260,112,299,95,211
         objects:
         - person
+    motion:
+      mask:
+        - 546,56,640,102,640,0,355,0
   cctv-side:
     ffmpeg:
       inputs:
@@ -112,3 +115,6 @@ cameras:
         retain:
           default: 28
           mode: active_objects
+    motion:
+      mask:
+        - 0,102,490,43,491,0,0,0
