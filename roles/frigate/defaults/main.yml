@@ -28,3 +28,5 @@ frigate_docker_compose:
         - "8554:8554" # RTSP feeds
         - "8555:8555/tcp" # WebRTC over tcp
         - "8555:8555/udp" # WebRTC over udp
+      environment:
+        - LIBVA_DRIVER_NAME=i965
