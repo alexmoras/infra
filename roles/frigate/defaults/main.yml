@@ -17,7 +17,7 @@ frigate_docker_compose:
       volumes:
         - /etc/localtime:/etc/localtime:ro
         - '{{ frigate_storage_location }}/config.yml:/config/config.yml:ro'
-        - '{{ frigate_storage_location }}/storage:/media/frigate'
+        - '{{ frigate_storage_location }}:/media/frigate'
         - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
           target: /tmp/cache
           tmpfs:
