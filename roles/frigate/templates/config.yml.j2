@@ -5,8 +5,12 @@ mqtt:
   user: {{ mqtt_user }}
   password: {{ mqtt_password }}
 
-ffmpeg:
-  hwaccel_args: preset-vaapi
+database:
+  path: {{ frigate_storage_location}}/frigate.db
+
+# currently having issues with hwaccel
+# ffmpeg:
+#   hwaccel_args: preset-vaapi
 
 detectors:
   ov:
