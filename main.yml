@@ -149,6 +149,8 @@
     roles:
       - role: grog.package
       - role: pip-fix
+      - role: caddy_ansible.caddy_ansible
+        tags: caddy
       - role: geerlingguy.ntp
       - role: geerlingguy.docker
         tags: docker, frigate
