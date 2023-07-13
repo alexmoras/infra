@@ -81,6 +81,8 @@ cameras:
         retain:
           default: 28
           mode: active_objects
+    ui:
+      order: 0
   cctv-front:
     ffmpeg:
       inputs:
@@ -108,6 +110,8 @@ cameras:
         coordinates: 219,189,269,260,112,299,95,211
         objects:
         - person
+    ui:
+      order: 1
   cctv-side:
     ffmpeg:
       inputs:
@@ -128,6 +132,8 @@ cameras:
         retain:
           default: 28
           mode: active_objects
+    ui:
+      order: 2
   cctv-rear:
     ffmpeg:
       inputs:
@@ -148,3 +154,5 @@ cameras:
         retain:
           default: 28
           mode: active_objects
+    ui:
+      order: 3
