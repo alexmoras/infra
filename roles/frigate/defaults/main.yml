@@ -16,6 +16,7 @@ frigate_docker_compose:
         - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
       volumes:
         - /etc/localtime:/etc/localtime:ro
+        - '{{ frigate_storage_location }}/go2rtc:/config/go2rtc'
         - '{{ frigate_storage_location }}/config.yml:/config/config.yml:ro'
         - '{{ frigate_storage_location }}:/media/frigate'
         - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
