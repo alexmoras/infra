@@ -29,3 +29,4 @@ frigate_docker_compose:
         - "8555:8555/udp" # WebRTC over udp
       environment:
         - LIBVA_DRIVER_NAME=i965
+        - 'PLUS_API_KEY={{ frigate_plus_api_key }}'
