@@ -12,6 +12,8 @@ frigate_docker_compose:
       restart: unless-stopped
       image: ghcr.io/blakeblackshear/frigate:stable
       shm_size: "128mb" # update for your cameras based on calculation above
+      cap_add:
+        - CAP_PERFMON
       devices:
         - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
       volumes:
