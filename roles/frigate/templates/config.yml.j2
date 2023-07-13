@@ -5,9 +5,8 @@ mqtt:
   user: {{ mqtt_user }}
   password: {{ mqtt_password }}
 
-# currently having issues with hwaccel
-# ffmpeg:
-#   hwaccel_args: preset-vaapi
+ffmpeg:
+  hwaccel_args: preset-intel-qsv-h264
 
 detectors:
   ov:
